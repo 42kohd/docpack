@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/block.schema.json",
+  "title": "Block",
+  "description": "One typed block of a document body.",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": {"enum": ["section", "paragraph", "list", "steps", "definition_list", "code", "command", "callout", "table", "reference_table", "cards", "image"]}
+  },
+  "allOf": [
+    {"if": {"properties": {"type": {"const": "section"}}}, "then": {"$ref": "#/$defs/section"}},
+    {"if": {"properties": {"type": {"const": "paragraph"}}}, "then": {"$ref": "#/$defs/paragraph"}},
+    {"if": {"properties": {"type": {"const": "list"}}}, "then": {"$ref": "#/$defs/list"}},
+    {"if": {"properties": {"type": {"const": "steps"}}}, "then": {"$ref": "#/$defs/steps"}},
+    {"if": {"properties": {"type": {"const": "definition_list"}}}, "then": {"$ref": "#/$defs/definition_list"}},
+    {"if": {"properties": {"type": {"const": "code"}}}, "then": {"$ref": "#/$defs/code"}},
+    {"if": {"properties": {"type": {"const": "command"}}}, "then": {"$ref": "#/$defs/command"}},
+    {"if": {"properties": {"type": {"const": "callout"}}}, "then": {"$ref": "#/$defs/callout"}},
+    {"if": {"properties": {"type": {"const": "table"}}}, "then": {"$ref": "#/$defs/table"}},
+    {"if": {"properties": {"type": {"const": "reference_table"}}}, "then": {"$ref": "#/$defs/reference_table"}},
+    {"if": {"properties": {"type": {"const": "cards"}}}, "then": {"$ref": "#/$defs/cards"}},
+    {"if": {"properties": {"type": {"const": "image"}}}, "then": {"$ref": "#/$defs/image"}}
+  ],
+  "$defs": {
+    "runs": {"$ref": "text-run.schema.json#/$defs/runs"},
+    "blocks": {"type": "array", "items": {"$ref": "#"}},
+    "id": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+    "slug": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+    "section": {
+      "type": "object",
+      "required": ["type", "id", "title", "level", "body"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "section"},
+        "id": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "level": {"type": "integer", "minimum": 2, "maximum": 5},
+        "body": {"$ref": "#/$defs/blocks"}
+      }
+    },
+    "paragraph": {
+      "type": "object",
+      "required": ["type", "text"],
+      "additionalProperties": false,
+      "properties": {"type": {"const": "paragraph"}, "text": {"$ref": "#/$defs/runs"}}
+    },
+    "list_item": {
+      "type": "object",
+      "required": ["text"],
+      "additionalProperties": false,
+      "properties": {
+        "text": {"$ref": "#/$defs/runs"},
+        "items": {"type": "array", "items": {"$ref": "#/$defs/list_item"}, "minItems": 1}
+      }
+    },
+    "list": {
+      "type": "object",
+      "required": ["type", "ordered", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "list"},
+        "ordered": {"type": "boolean"},
+        "items": {"type": "array", "items": {"$ref": "#/$defs/list_item"}, "minItems": 1}
+      }
+    },
+    "steps": {
+      "type": "object",
+      "required": ["type", "steps"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "steps"},
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["title", "body"],
+            "additionalProperties": false,
+            "properties": {"title": {"type": "string", "minLength": 1}, "body": {"$ref": "#/$defs/blocks"}}
+          }
+        }
+      }
+    },
+    "definition_list": {
+      "type": "object",
+      "required": ["type", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "definition_list"},
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["term", "definition"],
+            "additionalProperties": false,
+            "properties": {"term": {"$ref": "#/$defs/runs"}, "definition": {"$ref": "#/$defs/runs"}}
+          }
+        }
+      }
+    },
+    "code": {
+      "type": "object",
+      "required": ["type", "language", "code"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "code"},
+        "language": {"type": "string", "pattern": "^[a-z0-9_+-]+$"},
+        "title": {"type": "string", "minLength": 1},
+        "code": {"type": "string"}
+      }
+    },
+    "variant": {
+      "oneOf": [
+        {"type": "object", "required": ["command"], "additionalProperties": false, "properties": {"command": {"type": "string", "minLength": 1}}},
+        {"type": "object", "required": ["none"], "additionalProperties": false, "properties": {"none": {"type": "string", "minLength": 1}}}
+      ]
+    },
+    "command": {
+      "type": "object",
+      "required": ["type", "caption", "variants"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "command"},
+        "caption": {"type": "string", "minLength": 1},
+        "variants": {
+          "type": "object",
+          "required": ["windows", "linux", "macos"],
+          "additionalProperties": false,
+          "properties": {
+            "windows": {"$ref": "#/$defs/variant"},
+            "linux": {"$ref": "#/$defs/variant"},
+            "macos": {"$ref": "#/$defs/variant"}
+          }
+        }
+      }
+    },
+    "callout": {
+      "type": "object",
+      "required": ["type", "kind", "title", "body"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "callout"},
+        "kind": {"enum": ["note", "tip", "warning", "important"]},
+        "title": {"type": "string", "minLength": 1},
+        "body": {"$ref": "#/$defs/blocks"}
+      }
+    },
+    "table": {
+      "type": "object",
+      "required": ["type", "header", "rows"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "table"},
+        "header": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/runs"}},
+        "rows": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {"type": "array", "items": {"type": "array", "items": {"$ref": "text-run.schema.json"}}}
+        }
+      }
+    },
+    "reference_table": {
+      "type": "object",
+      "required": ["type", "source", "columns", "rows"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "reference_table"},
+        "source": {"enum": ["flags", "fields", "platforms", "datasets", "releases", "panels", "dashboard_fields"]},
+        "filter": {"type": "object", "additionalProperties": {"type": "string"}},
+        "limit": {"type": "integer", "minimum": 1},
+        "columns": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "rows": {"type": "array", "minItems": 1, "items": {"type": "array", "items": {"type": "string"}}}
+      }
+    },
+    "cards": {
+      "type": "object",
+      "required": ["type", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "cards"},
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["title", "doc", "text"],
+            "additionalProperties": false,
+            "properties": {
+              "title": {"type": "string", "minLength": 1},
+              "doc": {"$ref": "#/$defs/slug"},
+              "section": {"$ref": "#/$defs/id"},
+              "text": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "required": ["type", "src", "alt"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "image"},
+        "src": {"type": "string", "pattern": "^assets/"},
+        "alt": {"type": "string", "minLength": 1},
+        "caption": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

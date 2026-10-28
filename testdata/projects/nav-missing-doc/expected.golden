@@ -1,0 +1,1 @@
+product.yaml:8  nav-missing-doc  Navigation lists "ghost", which has no document. Create docs/ghost.md (docpack new <type> ghost), or remove the entry

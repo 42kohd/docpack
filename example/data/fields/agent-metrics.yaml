@@ -1,0 +1,60 @@
+- name: timestamp
+  type: timestamp
+  required: true
+  description: End of the one-minute window, in UTC.
+  example: "2026-03-14T10:23:00Z"
+  levels: [minimal, standard, verbose]
+- name: agent.id
+  type: string
+  required: true
+  description: Stable identifier of the agent.
+  example: a1f4c9
+  levels: [minimal, standard, verbose]
+- name: records_read
+  type: int
+  required: true
+  description: Records read from all inputs in the window.
+  example: 1830
+  levels: [minimal, standard, verbose]
+- name: records_sent
+  type: int
+  required: true
+  description: Records accepted by the target in the window.
+  example: 1830
+  levels: [minimal, standard, verbose]
+- name: bytes_sent
+  type: int
+  required: false
+  description: Bytes sent to the target after compression.
+  example: 214877
+  levels: [standard, verbose]
+- name: batches_failed
+  type: int
+  required: true
+  description: Batch attempts the target refused or that timed out.
+  example: 0
+  levels: [minimal, standard, verbose]
+- name: retry_count
+  type: int
+  required: false
+  description: Retries started in the window.
+  example: 0
+  levels: [standard, verbose]
+- name: queue_depth
+  type: int
+  required: true
+  description: Records waiting to be sent at the end of the window.
+  example: 120
+  levels: [minimal, standard, verbose]
+- name: flush_ms
+  type: float
+  required: false
+  description: Average time from a batch closing to the target accepting it, in milliseconds.
+  example: 84.5
+  levels: [standard, verbose]
+- name: input_files
+  type: int
+  required: false
+  description: Files the agent was reading at the end of the window.
+  example: 12
+  levels: [verbose]

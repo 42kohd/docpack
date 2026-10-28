@@ -1,0 +1,12 @@
+- os: linux
+  version: Kernel 5+
+  arch: [x86]
+  capabilities: {watch: true}
+- os: windows
+  arch: [amd64]
+  capabilities: {watch: yes please}
+  colour: blue
+- os: macos
+  version: macOS 14
+  arch: [arm64]
+  capabilities: {watch: false}

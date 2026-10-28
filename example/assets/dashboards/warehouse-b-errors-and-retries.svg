@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" font-family="system-ui, sans-serif" font-size="13">
+<rect width="800" height="460" fill="#f4f5f6"/>
+<rect width="800" height="44" fill="#5b4a9e"/>
+<text x="20" y="28" fill="#fff" font-size="16" font-weight="700">Errors and retries</text>
+<text x="780" y="28" fill="#fff" text-anchor="end" opacity=".8">last 24 hours</text>
+<rect x="20" y="64" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="34" y="88" fill="#1d2226" font-weight="600">Failed batches by agent</text>
+<polyline points="34.0,159.4 48.9,148.4 63.7,163.6 78.6,157.8 93.5,142.8 108.3,132.4 123.2,123.3 138.1,124.1 153.0,135.8 167.8,125.3 182.7,131.4 197.6,120.4 212.4,110.1 227.3,113.9 242.2,117.5 257.0,110.1 271.9,110.1 286.8,122.2 301.7,135.8 316.5,148.6 331.4,133.8 346.3,122.6 361.1,135.5 376.0,123.6" fill="none" stroke="#5b4a9e" stroke-width="2"/>
+<line x1="34" y1="226" x2="376" y2="226" stroke="#dde0e3"/>
+<rect x="410" y="64" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="424" y="88" fill="#1d2226" font-weight="600">Retries</text>
+<rect x="428.0" y="111.9" width="49.0" height="114.1" rx="3" fill="#5b4a9e" opacity="0.45"/>
+<rect x="485.0" y="141.5" width="49.0" height="84.5" rx="3" fill="#5b4a9e" opacity="0.54"/>
+<rect x="542.0" y="169.5" width="49.0" height="56.5" rx="3" fill="#5b4a9e" opacity="0.63"/>
+<rect x="599.0" y="151.4" width="49.0" height="74.6" rx="3" fill="#5b4a9e" opacity="0.72"/>
+<rect x="656.0" y="189.6" width="49.0" height="36.4" rx="3" fill="#5b4a9e" opacity="0.81"/>
+<rect x="713.0" y="200.3" width="49.0" height="25.7" rx="3" fill="#5b4a9e" opacity="0.90"/>
+<rect x="20" y="262" width="760" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="34" y="286" fill="#1d2226" font-weight="600">Records that failed to parse</text>
+<polyline points="34.0,345.8 65.8,340.3 97.7,339.3 129.5,323.4 161.3,325.9 193.1,312.3 225.0,308.1 256.8,318.7 288.6,327.8 320.4,335.3 352.3,344.8 384.1,341.7 415.9,350.5 447.7,353.4 479.6,366.9 511.4,351.9 543.2,357.3 575.0,358.8 606.9,355.8 638.7,341.0 670.5,343.9 702.3,328.6 734.2,328.5 766.0,327.4" fill="none" stroke="#5b4a9e" stroke-width="2"/>
+<line x1="34" y1="424" x2="766" y2="424" stroke="#dde0e3"/>
+</svg>

@@ -1,0 +1,2 @@
+docs/link-html.md:10  link-html  Link to a page file "setup.html". Link to the document instead: [text](doc:<slug>)
+docs/link-html.md:10  link-html  Relative link "../guide". Link to a document with [text](doc:<slug>) or to a page with https://

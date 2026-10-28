@@ -1,0 +1,2 @@
+docs/template-unknown.md:10  template-unknown  Unknown reference expression {{ widgets }}. Use one of {{ flags group="…" }}, {{ fields dataset="…" }}, {{ platforms }}, {{ datasets }}, {{ releases limit=N }}
+docs/template-unknown.md:12  template-unknown  Unknown reference expression {{ panels }}. Remove it; dashboard panels and fields are generated from data/dashboards/

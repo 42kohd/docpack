@@ -1,0 +1,2 @@
+docs/code-language.md:10  code-language  Code block has no language. Add a language after the opening fence, for example ```bash, ```yaml or ```text
+docs/code-language.md:14  code-language  Code block language "Bash!" is not lowercase letters, digits, _, + or -. Use a plain language name, for example ```bash

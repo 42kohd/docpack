@@ -1,0 +1,3 @@
+docs/fm-missing.md:1  fm-missing  Frontmatter has no summary. Add summary: <one sentence saying what the page is for>
+docs/fm-missing.md:1  fm-missing  Frontmatter has no task. Add task: <the task as a verb phrase>
+docs/fm-missing.md:1  fm-missing  Frontmatter has no title. Add title: <the page title>

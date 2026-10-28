@@ -1,0 +1,42 @@
+- id: throughput
+  title: Throughput
+  purpose: Records and bytes arriving in Warehouse B over time.
+  screenshot: assets/dashboards/warehouse-b-throughput.svg
+  panels:
+    - title: Records sent
+      query: SUM records_sent FROM agent_metrics BY 1m
+      fields: [records_sent]
+    - title: Bytes sent
+      query: SUM bytes_sent FROM agent_metrics BY 1m
+      fields: [bytes_sent]
+    - title: Records read versus sent
+      query: SUM records_read, SUM records_sent FROM agent_metrics BY 5m
+      fields: [records_read, records_sent]
+- id: errors-and-retries
+  title: Errors and retries
+  purpose: Where batches fail and how often agents retry.
+  screenshot: assets/dashboards/warehouse-b-errors-and-retries.svg
+  panels:
+    - title: Failed batches by agent
+      query: SUM batches_failed FROM agent_metrics BY agent.id
+      fields: [batches_failed, agent.id]
+    - title: Retries
+      query: SUM retry_count FROM agent_metrics BY 5m
+      fields: [retry_count]
+    - title: Records that failed to parse
+      query: COUNT FROM records WHERE level = 'error' BY source.path
+      fields: [level, source.path]
+- id: agent-fleet
+  title: Agent fleet
+  purpose: Every agent that reported in the last hour, with its load.
+  screenshot: assets/dashboards/warehouse-b-agent-fleet.svg
+  panels:
+    - title: Agents reporting
+      query: COUNT DISTINCT agent.id FROM agent_metrics BY 5m
+      fields: [agent.id]
+    - title: Input files per agent
+      query: LAST input_files FROM agent_metrics BY agent.id
+      fields: [input_files, agent.id]
+    - title: Queue depth
+      query: MAX queue_depth FROM agent_metrics BY agent.id
+      fields: [queue_depth, agent.id]

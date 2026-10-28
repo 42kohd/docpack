@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" font-family="system-ui, sans-serif" font-size="13">
+<rect width="800" height="460" fill="#f4f5f6"/>
+<rect width="800" height="44" fill="#0f6e78"/>
+<text x="20" y="28" fill="#fff" font-size="16" font-weight="700">Ingest overview</text>
+<text x="780" y="28" fill="#fff" text-anchor="end" opacity=".8">last 24 hours</text>
+<rect x="20" y="64" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="34" y="88" fill="#1d2226" font-weight="600">Records per minute</text>
+<polyline points="34.0,171.4 48.9,184.2 63.7,178.7 78.6,194.4 93.5,193.0 108.3,198.0 123.2,213.8 138.1,213.5 153.0,213.8 167.8,213.8 182.7,213.8 197.6,213.8 212.4,213.8 227.3,201.8 242.2,213.8 257.0,213.8 271.9,209.1 286.8,192.7 301.7,189.9 316.5,193.7 331.4,176.3 346.3,192.9 361.1,179.8 376.0,187.5" fill="none" stroke="#0f6e78" stroke-width="2"/>
+<line x1="34" y1="226" x2="376" y2="226" stroke="#dde0e3"/>
+<rect x="410" y="64" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="424" y="88" fill="#1d2226" font-weight="600">Records by host</text>
+<rect x="428.0" y="188.4" width="49.0" height="37.6" rx="3" fill="#0f6e78" opacity="0.45"/>
+<rect x="485.0" y="190.8" width="49.0" height="35.2" rx="3" fill="#0f6e78" opacity="0.54"/>
+<rect x="542.0" y="173.4" width="49.0" height="52.6" rx="3" fill="#0f6e78" opacity="0.63"/>
+<rect x="599.0" y="126.9" width="49.0" height="99.1" rx="3" fill="#0f6e78" opacity="0.72"/>
+<rect x="656.0" y="185.1" width="49.0" height="40.9" rx="3" fill="#0f6e78" opacity="0.81"/>
+<rect x="713.0" y="148.4" width="49.0" height="77.6" rx="3" fill="#0f6e78" opacity="0.90"/>
+<rect x="20" y="262" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="34" y="286" fill="#1d2226" font-weight="600">Busiest files</text>
+<polyline points="34.0,357.9 48.9,362.6 63.7,360.8 78.6,376.8 93.5,393.0 108.3,403.7 123.2,397.1 138.1,399.8 153.0,406.6 167.8,403.4 182.7,405.2 197.6,411.8 212.4,401.0 227.3,393.7 242.2,403.1 257.0,400.4 271.9,399.5 286.8,385.7 301.7,377.3 316.5,385.1 331.4,367.5 346.3,381.5 361.1,384.5 376.0,375.1" fill="none" stroke="#0f6e78" stroke-width="2"/>
+<line x1="34" y1="424" x2="376" y2="424" stroke="#dde0e3"/>
+<rect x="410" y="262" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="424" y="286" fill="#1d2226" font-weight="600">Levels</text>
+<rect x="428.0" y="385.7" width="49.0" height="38.3" rx="3" fill="#0f6e78" opacity="0.45"/>
+<rect x="485.0" y="354.9" width="49.0" height="69.1" rx="3" fill="#0f6e78" opacity="0.54"/>
+<rect x="542.0" y="396.0" width="49.0" height="28.0" rx="3" fill="#0f6e78" opacity="0.63"/>
+<rect x="599.0" y="338.5" width="49.0" height="85.5" rx="3" fill="#0f6e78" opacity="0.72"/>
+<rect x="656.0" y="329.6" width="49.0" height="94.4" rx="3" fill="#0f6e78" opacity="0.81"/>
+<rect x="713.0" y="347.2" width="49.0" height="76.8" rx="3" fill="#0f6e78" opacity="0.90"/>
+</svg>

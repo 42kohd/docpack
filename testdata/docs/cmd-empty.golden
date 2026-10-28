@@ -1,0 +1,4 @@
+docs/cmd-empty.md:10  cmd-missing-variant  Command "Run" has no macos: line. Add macos: <command>, or macos: none: <reason> if the command does not apply there
+docs/cmd-empty.md:10  cmd-missing-variant  Command "Run" has no windows: line. Add windows: <command>, or windows: none: <reason> if the command does not apply there
+docs/cmd-empty.md:11  cmd-empty  windows: has no command. Write the command after windows:, or windows: none: <reason> if it does not apply
+docs/cmd-empty.md:13  cmd-empty  macos: none: has no reason. Say why, for example macos: none: Not available on this OS

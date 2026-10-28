@@ -1,0 +1,4 @@
+docs/template-arg.md:10  template-arg  Malformed arguments in {{ flags group=core }}. Write arguments as name="value" (quoted text) or limit=N (a number), for example {{ flags group="core" }}
+docs/template-arg.md:12  template-arg  {{ fields }} needs dataset. Write {{ fields dataset="<dataset id from data/datasets.yaml>" }}
+docs/template-arg.md:14  template-arg  limit must be an unquoted number. Write limit=3
+docs/template-arg.md:16  template-arg  {{ platforms }} takes no argument "os". Write {{ platforms }} with no arguments

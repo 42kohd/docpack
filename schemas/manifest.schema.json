@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/manifest.schema.json",
+  "title": "Manifest",
+  "description": "manifest.json at the root of a docpack package.",
+  "type": "object",
+  "required": ["schema_version", "product", "version", "generator", "nav", "documents", "assets"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"},
+    "product": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "generator": {"type": "string"},
+    "nav": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slug", "type", "title", "hash"],
+        "additionalProperties": false,
+        "properties": {
+          "slug": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+          "type": {"enum": ["landing", "concept", "howto", "integration", "format", "reference", "dashboard", "release"]},
+          "title": {"type": "string", "minLength": 1},
+          "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "assets": {"type": "array", "items": {"type": "string", "pattern": "^assets/"}}
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": ["title"],
+      "additionalProperties": false,
+      "anyOf": [{"required": ["doc"]}, {"required": ["children"]}],
+      "properties": {
+        "title": {"type": "string", "minLength": 1},
+        "doc": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+        "children": {"type": "array", "items": {"$ref": "#/$defs/node"}}
+      }
+    }
+  }
+}

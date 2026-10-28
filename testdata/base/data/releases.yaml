@@ -1,0 +1,10 @@
+- version: 2.0.1
+  date: 2026-02-01
+  kind: patch
+  items:
+    - {id: T-2, type: fix, text: A fix.}
+- version: 2.0.0
+  date: 2026-01-01
+  kind: major
+  items:
+    - {id: T-1, type: feature, text: A feature.}

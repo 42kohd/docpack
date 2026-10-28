@@ -1,0 +1,1 @@
+docs/fm-parse.md:1  fm-parse  The file does not start with --- frontmatter. Start the file with a --- line, then type, slug, title and summary, then another --- line

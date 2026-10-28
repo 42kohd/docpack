@@ -1,0 +1,5 @@
+data/dashboards/sink.yaml:4  data-ref  Screenshot assets/missing.svg does not exist. Add the image under assets/, or remove the screenshot key
+data/dashboards/sink.yaml:8  data-ref  Panel "Events" uses field "event.colour", which no dataset defines. Add the field to data/fields/<dataset>.yaml, or correct the name
+data/fields/ghost.yaml:1  data-ref  data/fields/ghost.yaml has no dataset "ghost" in data/datasets.yaml. Add the dataset to data/datasets.yaml, or rename the file to an existing dataset id
+data/flags.yaml:5  data-ref  --alpha lists platform "bsd", which is not in data/platforms.yaml. Use an os id from data/platforms.yaml: linux, windows, macos
+data/flags.yaml:13  data-ref  --beta is replaced by --nope, which is not a flag. Add the replacement flag, or correct replaced_by

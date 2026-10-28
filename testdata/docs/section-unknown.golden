@@ -1,0 +1,2 @@
+docs/section-unknown.md:13  section-unknown  Section "steps" is not in the howto template. Rename it to "Steps"; section titles are exact
+docs/section-unknown.md:17  section-unknown  Section "Background" is not in the howto template. Move the content into one of: Goal (required), Prerequisites, Steps (required), Result (required), Options, Related (required), or make it a ### subsection

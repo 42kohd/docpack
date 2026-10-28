@@ -1,0 +1,8 @@
+- id: records
+  description: One entry per log record the agent reads, with the line and where it came from.
+  avg_size_kb: 0.6
+  typical_count: 2500000
+- id: agent-metrics
+  description: One entry per agent per minute, describing what the agent read, sent and retried.
+  avg_size_kb: 0.4
+  typical_count: 1440

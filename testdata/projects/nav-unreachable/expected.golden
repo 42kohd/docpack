@@ -1,0 +1,1 @@
+docs/setup.md:1  nav-unreachable  The document is not in navigation and no document lists it in related. Add setup to nav in product.yaml, or to the related key of a document about the same topic

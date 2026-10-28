@@ -1,0 +1,1 @@
+docs/more/inner.md:0  doc-nested  Document is in a subdirectory of docs/. Move it to docs/inner.md; documents are flat and grouped by nav in product.yaml

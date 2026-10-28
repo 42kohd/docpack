@@ -1,0 +1,4 @@
+{{define "block/callout"}}<aside class="callout {{.Kind}}">
+<p class="callout-title">{{sub .Title}}</p>
+{{range .Body}}{{render .}}{{end}}
+</aside>{{end}}

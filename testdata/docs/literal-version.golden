@@ -1,0 +1,1 @@
+docs/literal-version.md:10  literal-version  A version number is written out. Write {version} for the current version; describe older behavior in a release document

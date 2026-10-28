@@ -1,0 +1,3 @@
+docs/block-forbidden.md:10  block-forbidden  Blockquote. Use a callout instead: ::: note Title, the text, then :::
+docs/block-forbidden.md:10  block-forbidden  Horizontal rule. Remove it; sections already separate content
+docs/block-forbidden.md:14  block-forbidden  Indented code block. Use a fenced code block with a language, for example ```bash

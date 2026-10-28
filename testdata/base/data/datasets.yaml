@@ -1,0 +1,4 @@
+- id: events
+  description: One entry per event.
+  avg_size_kb: 1
+  typical_count: 100

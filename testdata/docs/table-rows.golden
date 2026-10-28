@@ -1,0 +1,1 @@
+docs/table-rows.md:10  table-rows  Table has 13 rows; the maximum is 12. Split the table, or move the facts into a data file and use a {{ … }} reference

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" font-family="system-ui, sans-serif" font-size="13">
+<rect width="800" height="460" fill="#f4f5f6"/>
+<rect width="800" height="44" fill="#0f6e78"/>
+<text x="20" y="28" fill="#fff" font-size="16" font-weight="700">Delivery health</text>
+<text x="780" y="28" fill="#fff" text-anchor="end" opacity=".8">last 24 hours</text>
+<rect x="20" y="64" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="34" y="88" fill="#1d2226" font-weight="600">Queue depth by agent</text>
+<polyline points="34.0,151.3 48.9,158.1 63.7,150.9 78.6,147.5 93.5,144.5 108.3,146.2 123.2,133.7 138.1,117.4 153.0,118.4 167.8,112.4 182.7,128.5 197.6,121.1 212.4,115.7 227.3,110.1 242.2,110.1 257.0,118.0 271.9,122.2 286.8,116.0 301.7,133.5 316.5,134.9 331.4,147.0 346.3,161.0 361.1,177.2 376.0,167.4" fill="none" stroke="#0f6e78" stroke-width="2"/>
+<line x1="34" y1="226" x2="376" y2="226" stroke="#dde0e3"/>
+<rect x="410" y="64" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="424" y="88" fill="#1d2226" font-weight="600">Failed batches</text>
+<rect x="428.0" y="189.8" width="49.0" height="36.2" rx="3" fill="#0f6e78" opacity="0.45"/>
+<rect x="485.0" y="178.9" width="49.0" height="47.1" rx="3" fill="#0f6e78" opacity="0.54"/>
+<rect x="542.0" y="165.8" width="49.0" height="60.2" rx="3" fill="#0f6e78" opacity="0.63"/>
+<rect x="599.0" y="121.9" width="49.0" height="104.1" rx="3" fill="#0f6e78" opacity="0.72"/>
+<rect x="656.0" y="194.2" width="49.0" height="31.8" rx="3" fill="#0f6e78" opacity="0.81"/>
+<rect x="713.0" y="160.5" width="49.0" height="65.5" rx="3" fill="#0f6e78" opacity="0.90"/>
+<rect x="20" y="262" width="760" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="34" y="286" fill="#1d2226" font-weight="600">Flush time</text>
+<polyline points="34.0,361.2 65.8,347.2 97.7,335.5 129.5,322.2 161.3,330.3 193.1,333.4 225.0,338.5 256.8,324.5 288.6,308.1 320.4,320.9 352.3,332.7 384.1,342.5 415.9,352.3 447.7,352.8 479.6,349.6 511.4,358.3 543.2,376.4 575.0,379.4 606.9,384.2 638.7,381.7 670.5,365.2 702.3,358.2 734.2,357.6 766.0,353.3" fill="none" stroke="#0f6e78" stroke-width="2"/>
+<line x1="34" y1="424" x2="766" y2="424" stroke="#dde0e3"/>
+</svg>

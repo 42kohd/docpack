@@ -1,0 +1,2 @@
+docs/ref-empty.md:10  ref-empty  {{ flags group="nope" }} selects no rows. Use a group from data/flags.yaml: core, io
+docs/ref-empty.md:12  ref-empty  {{ fields dataset="missing" }} selects no rows. Use a dataset with a file in data/fields/: events

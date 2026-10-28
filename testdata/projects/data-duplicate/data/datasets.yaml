@@ -1,0 +1,8 @@
+- id: events
+  description: One entry per event.
+  avg_size_kb: 1
+  typical_count: 100
+- id: events
+  description: The same id again.
+  avg_size_kb: 2
+  typical_count: 5

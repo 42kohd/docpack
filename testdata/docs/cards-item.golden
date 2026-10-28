@@ -1,0 +1,3 @@
+docs/cards-item.md:10  cards-item  ::: cards holds no cards. Write each card as - [Title](doc:slug) — one line of text
+docs/cards-item.md:11  cards-item  Card is not [Title](doc:slug) — text. Write each card as - [Title](doc:slug) — one line of text
+docs/cards-item.md:12  cards-item  Card is not [Title](doc:slug) — text. Write each card as - [Title](doc:slug) — one line of text

@@ -1,0 +1,10 @@
+{{define "block/command"}}{{$id := uid}}<figure class="command">
+<figcaption>{{sub .Caption}}</figcaption>
+<div class="tabs">
+{{range $i, $os := oses}}{{$v := index $.Variants $os}}
+<input type="radio" name="{{$id}}" id="{{$id}}-{{$os}}"{{if eq $i 0}} checked{{end}}>
+<label for="{{$id}}-{{$os}}">{{osname $os}}</label>
+<div class="panel">{{if $v.None}}<p class="none">{{sub $v.None}}</p>{{else}}<pre><code>{{sub $v.Command}}</code></pre>{{end}}</div>
+{{end}}
+</div>
+</figure>{{end}}

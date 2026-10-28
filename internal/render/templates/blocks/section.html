@@ -1,0 +1,4 @@
+{{define "block/section"}}<section class="s{{.Level}}">
+{{heading .}}
+{{range .Body}}{{render .}}{{end}}
+</section>{{end}}

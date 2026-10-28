@@ -1,0 +1,1 @@
+docs/cmd-unknown-key.md:14  cmd-unknown-key  Command line "freebsd: a" does not start with windows:, linux: or macos:. Write exactly three lines: windows: <command>, linux: <command>, macos: <command>

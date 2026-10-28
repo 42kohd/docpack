@@ -1,0 +1,3 @@
+docs/list-content.md:12  list-content  A list item holds more than one paragraph. Keep one paragraph per item, or use ::: steps for a procedure
+docs/list-content.md:15  list-content  A list item holds a code block. Move it out of the list; use ::: steps when a procedure needs code or commands
+docs/list-content.md:15  list-content  Empty list item. Write text after the marker, or remove the item

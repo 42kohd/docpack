@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/data/datasets.schema.json",
+  "title": "Datasets",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "description", "avg_size_kb", "typical_count"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+      "description": {"type": "string", "minLength": 1},
+      "avg_size_kb": {"type": "number", "exclusiveMinimum": 0},
+      "typical_count": {"type": "integer", "minimum": 0}
+    }
+  }
+}

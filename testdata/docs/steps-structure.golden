@@ -1,0 +1,5 @@
+docs/steps-structure.md:10  steps-structure  ::: steps takes no title. Write ::: steps alone on the line; put any introduction in the paragraph above it
+docs/steps-structure.md:11  steps-structure  Content inside ::: steps before the first step heading. Start the steps block with ### <first step title>, or move the content above ::: steps
+docs/steps-structure.md:13  steps-structure  Step title "1. Numbered" starts with a number. Remove the number; steps are numbered when rendered
+docs/steps-structure.md:18  steps-structure  ::: steps holds no steps. Add one ### heading per step inside the container
+docs/steps-structure.md:19  steps-structure  Content inside ::: steps before the first step heading. Start the steps block with ### <first step title>, or move the content above ::: steps

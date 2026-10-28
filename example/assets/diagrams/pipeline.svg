@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" width="720" height="200" font-family="system-ui, sans-serif" font-size="14">
+<rect width="720" height="200" rx="12" fill="#ffffff"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5d666e"/></marker></defs>
+<g fill="#f2f2ef" stroke="#c9c9c1">
+<rect x="20" y="60" width="130" height="80" rx="8"/>
+<rect x="200" y="60" width="130" height="80" rx="8"/>
+<rect x="380" y="60" width="130" height="80" rx="8"/>
+<rect x="560" y="30" width="140" height="60" rx="8"/>
+<rect x="560" y="110" width="140" height="60" rx="8"/>
+</g>
+<g fill="#1d2226" text-anchor="middle">
+<text x="85" y="95" font-weight="700">Inputs</text><text x="85" y="117" fill="#5d666e">files and globs</text>
+<text x="265" y="95" font-weight="700">Batcher</text><text x="265" y="117" fill="#5d666e">size or time</text>
+<text x="445" y="95" font-weight="700">Output</text><text x="445" y="117" fill="#5d666e">retries, state</text>
+<text x="630" y="58" font-weight="700">Forward</text><text x="630" y="76" fill="#5d666e">warehouse A or B</text>
+<text x="630" y="138" font-weight="700">File</text><text x="630" y="156" fill="#5d666e">jsonl or csv</text>
+</g>
+<g stroke="#5d666e" stroke-width="2" marker-end="url(#arr)">
+<line x1="150" y1="100" x2="196" y2="100"/><line x1="330" y1="100" x2="376" y2="100"/>
+<line x1="510" y1="90" x2="556" y2="64"/><line x1="510" y1="110" x2="556" y2="136"/>
+</g>
+<rect x="380" y="152" width="130" height="30" rx="6" fill="#e1f0f1" stroke="#0f6e78"/>
+<text x="445" y="172" text-anchor="middle" fill="#0f6e78">state directory</text>
+<line x1="445" y1="140" x2="445" y2="150" stroke="#0f6e78" stroke-width="2"/>
+</svg>

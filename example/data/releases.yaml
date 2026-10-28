@@ -1,0 +1,46 @@
+- version: 1.4.0
+  date: 2026-09-15
+  kind: minor
+  items:
+    - id: LF-412
+      type: feature
+      text: Multiline records with --multiline-start, as a prerelease feature.
+    - id: LF-398
+      type: feature
+      text: The agent-metrics dataset now reports flush_ms.
+    - id: LF-405
+      type: fix
+      text: The agent no longer reads a rotated file twice when the file is renamed and recreated within one poll interval.
+    - id: LF-409
+      type: change
+      text: Warehouse B batches are sent with compression by default.
+  upgrade_notes:
+    - Warehouse B agents with --compress false keep their setting. Agents that never set it start compressing after the upgrade.
+- version: 1.3.2
+  date: 2026-07-02
+  kind: patch
+  items:
+    - id: LF-377
+      type: fix
+      text: Parked batches are retried after a restart instead of waiting for the next new record.
+    - id: LF-381
+      type: fix
+      text: The Windows service now stops within 10 seconds when the target is unreachable.
+  advisories:
+    - id: LF-ADV-3
+      text: On Windows, earlier versions created the state directory with write access for all local users. Version 1.3.2 resets the access list on start.
+- version: 1.3.0
+  date: 2026-05-20
+  kind: minor
+  items:
+    - id: LF-340
+      type: feature
+      text: Local output rotation with --rotate-size and --rotate-keep.
+    - id: LF-352
+      type: deprecation
+      text: --batch-records is renamed --batch-size. The old name still works and logs a warning.
+    - id: LF-355
+      type: fix
+      text: CSV output quotes fields that contain the delimiter.
+  upgrade_notes:
+    - Replace --batch-records with --batch-size in service definitions. The old name will be removed in 2.0.0.

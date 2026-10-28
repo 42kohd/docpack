@@ -1,0 +1,1 @@
+docs/alias-duplicate.md:6  alias-duplicate  Alias "guide" is the slug of docs/guide.md. Remove the alias; an alias must be a former slug that no document uses now

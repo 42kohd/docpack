@@ -1,0 +1,51 @@
+version: 2
+
+project_name: docpack
+
+builds:
+  - id: docpack
+    main: ./cmd/docpack
+    binary: docpack
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, windows, darwin]
+    goarch: [amd64, arm64]
+    flags: [-trimpath]
+    ldflags:
+      - -s -w -X main.version={{ .Version }}
+
+archives:
+  - id: docpack
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    files:
+      - LICENSE
+      - README.md
+      - SPEC.md
+      - src: kit/README.md
+        dst: kit
+        strip_parent: true
+      - src: kit/CLAUDE.md
+        dst: kit
+        strip_parent: true
+      - kit/skeletons/*
+      - kit/examples/*
+      - kit/prompts/*
+      - schemas/*.json
+      - schemas/data/*.json
+
+checksum:
+  name_template: checksums.txt
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  use: github
+
+release:
+  draft: true
+  name_template: "docpack {{ .Version }}"

@@ -1,0 +1,4 @@
+docs/setup.md:1  nav-unreachable  The document is not in navigation and no document lists it in related. Add setup to nav in product.yaml, or to the related key of a document about the same topic
+docs/sink-main.md:1  nav-unreachable  The document is not in navigation and no document lists it in related. Add sink-main to nav in product.yaml, or to the related key of a document about the same topic
+product.yaml:14  nav-depth  Navigation is nested more than 3 levels. Move this entry up a level; the top-level group counts as level 1
+product.yaml:17  nav-depth  Generated group "Generated" puts its documents at level 4. Move the generated group up a level; navigation is at most 3 levels deep

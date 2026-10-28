@@ -1,0 +1,2 @@
+docs/fm-unknown-key.md:6  fm-unknown-key  Key "version" is only allowed in release documents. Remove the version: line
+docs/fm-unknown-key.md:7  fm-unknown-key  Unknown frontmatter key "author". Remove it; allowed keys are type, slug, title, summary, since, status, nav_title, aliases, related and the keys of this type

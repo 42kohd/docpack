@@ -1,0 +1,34 @@
+name: Lanternfish
+short: lf
+binary: lanternfish
+version: 1.4.0
+support_email: support@example.com
+nav:
+  - group: Get started
+    items:
+      - index
+      - how-it-works
+      - doc: install
+        children:
+          - ship-first-file
+  - group: Guides
+    items:
+      - rotate-output
+      - delivery-guarantees
+  - group: Integrations
+    items:
+      - warehouse-a
+      - warehouse-b
+  - group: Dashboards
+    items:
+      - group: Warehouse A
+        from: dashboards/warehouse-a
+      - group: Warehouse B
+        from: dashboards/warehouse-b
+  - group: Reference
+    items:
+      - jsonl
+      - cli-reference
+  - group: Releases
+    from: releases
+    limit: 3

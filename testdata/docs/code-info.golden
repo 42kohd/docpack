@@ -1,0 +1,1 @@
+docs/code-info.md:10  code-info  Unsupported code fence attributes "{linenos=true}". Keep only the language and an optional title="…", for example ```yaml title="agent.yaml"

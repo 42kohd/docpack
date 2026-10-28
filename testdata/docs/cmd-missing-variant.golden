@@ -1,0 +1,1 @@
+docs/cmd-missing-variant.md:10  cmd-missing-variant  Command "Run" has no macos: line. Add macos: <command>, or macos: none: <reason> if the command does not apply there

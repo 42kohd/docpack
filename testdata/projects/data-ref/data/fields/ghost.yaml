@@ -1,0 +1,5 @@
+- name: ghost.id
+  type: string
+  required: true
+  description: A field of a dataset that does not exist.
+  levels: [minimal]

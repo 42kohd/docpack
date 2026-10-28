@@ -1,0 +1,1 @@
+docs/table-reference-shape.md:10  table-reference-shape  Hand-typed flag table. Delete the table and write {{ flags group="…" }} in its place; the rows come from data/

@@ -1,0 +1,5 @@
+docs/fm-invalid.md:2  fm-invalid  Unknown type "guide". Use one of landing, concept, howto, integration, format, reference, dashboard, release
+docs/fm-invalid.md:3  fm-invalid  Slug "Bad_Slug" is not lowercase words joined by -. Set slug: fm-invalid and name the file fm-invalid.md
+docs/fm-invalid.md:6  fm-invalid  status "beta" is not ga or prerelease. Use status: ga or status: prerelease
+docs/fm-invalid.md:7  fm-invalid  since "soon" is not a version. Write it as since: 1.2 or since: 1.2.0
+docs/fm-invalid.md:8  fm-invalid  related must be a list of slugs. Write it as related: [slug-one, slug-two]

@@ -1,0 +1,2 @@
+docs/html-forbidden.md:10  html-forbidden  Raw HTML block. Remove the HTML and use the Markdown constructs listed in the kit
+docs/html-forbidden.md:12  html-forbidden  Raw HTML in text. Remove the HTML; use **bold**, *italic*, `code` or a link instead

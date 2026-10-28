@@ -1,0 +1,1 @@
+{{define "block/cards"}}<ul class="cards">{{range .Cards}}<li><a href="/{{.Doc}}{{if .Section}}#{{.Section}}{{end}}"><span class="card-title">{{sub .Title}}</span><span class="card-text">{{sub .Text}}</span></a></li>{{end}}</ul>{{end}}

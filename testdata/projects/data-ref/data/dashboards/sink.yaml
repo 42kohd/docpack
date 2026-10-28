@@ -1,0 +1,8 @@
+- id: main
+  title: Main
+  purpose: The main view.
+  screenshot: assets/missing.svg
+  panels:
+    - title: Events
+      query: count(events)
+      fields: [event.name, event.colour]

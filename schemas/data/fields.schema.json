@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/data/fields.schema.json",
+  "title": "Fields of one dataset",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["name", "type", "required", "description", "levels"],
+    "additionalProperties": false,
+    "properties": {
+      "name": {"type": "string", "pattern": "^[a-z_][a-z0-9_.]*$"},
+      "type": {"enum": ["string", "int", "float", "bool", "timestamp", "object", "list"]},
+      "required": {"type": "boolean"},
+      "description": {"type": "string", "minLength": 1},
+      "example": {"type": ["string", "number", "boolean"]},
+      "levels": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["minimal", "standard", "verbose"]}}
+    }
+  }
+}

@@ -1,0 +1,1 @@
+docs/cmd-duplicate-key.md:13  cmd-duplicate-key  linux: appears twice. Keep one line per OS; join multi-step commands with && or use ::: steps

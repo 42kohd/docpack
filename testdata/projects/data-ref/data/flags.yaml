@@ -1,0 +1,19 @@
+- name: --alpha
+  group: core
+  type: string
+  description: The alpha setting.
+  platforms: [linux, bsd]
+  status: ga
+- name: --beta
+  group: core
+  type: int
+  description: Former name.
+  platforms: [linux]
+  status: deprecated
+  replaced_by: --nope
+- name: --gamma
+  group: io
+  type: bool
+  description: The gamma switch.
+  platforms: [linux]
+  status: ga

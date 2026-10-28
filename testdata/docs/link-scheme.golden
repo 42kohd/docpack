@@ -1,0 +1,4 @@
+docs/link-scheme.md:10  link-scheme  Insecure link "http://example.com". Use the https:// address of the page
+docs/link-scheme.md:10  link-scheme  Link "ftp://example.com/x" is not https://. Use an https:// address, or doc:<slug> for a document
+docs/link-scheme.md:10  link-scheme  Mail link "mailto:help@example.com". Write the address as text; use {support_email} for the support address
+docs/link-scheme.md:10  link-scheme  Malformed document link "doc:Guide". Write doc:<slug> or doc:<slug>#<section-id>, using lowercase words joined by -

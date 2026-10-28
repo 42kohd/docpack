@@ -1,0 +1,44 @@
+{{define "layout"}}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{sub .Doc.Title}} · {{.Product.Name}}</title>
+<link rel="stylesheet" href="/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">{{.Product.Name}}</a>
+  <span class="version">{{.Product.Version}}</span>
+  <span class="spacer"></span>
+  {{if .Errors}}<a class="status bad" href="#diagnostics">{{.Errors}} error{{if ne .Errors 1}}s{{end}}</a>{{else}}<span class="status ok">check passes</span>{{end}}
+</header>
+<div class="frame">
+  <nav class="sidebar" aria-label="Documentation">{{template "navtree" .Nav}}</nav>
+  <main>
+    {{if .Diags}}{{template "diagnostics" .Diags}}{{end}}
+    <article>
+      <p class="doctype">{{.Doc.Type}}{{if .Doc.Category}} · {{.Doc.Category}}{{end}}{{if eq .Doc.Status "prerelease"}} · <span class="badge">prerelease</span>{{end}}{{if .Doc.Since}} · since {{.Doc.Since}}{{end}}</p>
+      <h1>{{if .Doc.Icon}}<img class="icon" src="/{{.Doc.Icon}}" alt="">{{end}}{{sub .Doc.Title}}</h1>
+      <p class="lead">{{sub .Doc.Summary}}</p>
+      {{if eq .Doc.Type "release"}}<p class="meta">Released {{.Doc.Date}}</p>{{end}}
+      {{range .Doc.Body}}{{render .}}{{end}}
+    </article>
+  </main>
+  <aside class="toc" aria-label="On this page">
+    {{if .TOC}}<p class="toc-title">On this page</p>
+    <ul>{{range .TOC}}<li class="l{{.Level}}"><a href="#{{.ID}}">{{sub .Title}}</a></li>{{end}}</ul>{{end}}
+  </aside>
+</div>
+</body>
+</html>
+{{end}}
+
+{{define "navtree"}}<ul>{{range .}}<li>{{if .Doc}}<a href="/{{.Doc}}"{{if .Active}} aria-current="page"{{end}}>{{sub .Title}}</a>{{else}}<span class="group">{{sub .Title}}</span>{{end}}{{if .Children}}{{template "navtree" .Children}}{{end}}</li>{{end}}</ul>{{end}}
+
+{{define "diagnostics"}}<section id="diagnostics" class="diagnostics">
+<p><strong>docpack check</strong> reports {{len .}} problem{{if ne (len .) 1}}s{{end}}:</p>
+<ul>{{range .}}<li class="{{.Severity}}"><code>{{.File}}:{{.Line}}</code> <code>{{.Rule}}</code> {{.Message}}. <em>{{.Fix}}</em></li>{{end}}</ul>
+</section>{{end}}
+
+{{define "runs"}}{{range .}}{{run .}}{{end}}{{end}}

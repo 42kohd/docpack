@@ -1,0 +1,42 @@
+- id: ingest-overview
+  title: Ingest overview
+  purpose: How many records reach Warehouse A, and from which hosts and files.
+  screenshot: assets/dashboards/warehouse-a-ingest-overview.svg
+  panels:
+    - title: Records per minute
+      query: count(records) every 1m
+      fields: [timestamp]
+    - title: Records by host
+      query: count(records) by source.host top 10
+      fields: [source.host]
+    - title: Busiest files
+      query: count(records) by source.path top 10
+      fields: [source.path]
+    - title: Levels
+      query: count(records) by level
+      fields: [level]
+- id: delivery-health
+  title: Delivery health
+  purpose: Whether agents deliver on time, and which agents are falling behind.
+  screenshot: assets/dashboards/warehouse-a-delivery-health.svg
+  panels:
+    - title: Queue depth by agent
+      query: max(agent-metrics.queue_depth) by agent.id every 1m
+      fields: [queue_depth, agent.id]
+    - title: Failed batches
+      query: sum(agent-metrics.batches_failed) every 5m
+      fields: [batches_failed]
+    - title: Flush time
+      query: avg(agent-metrics.flush_ms) every 5m
+      fields: [flush_ms]
+- id: source-inventory
+  title: Source inventory
+  purpose: Which files each agent reads, and when each file last produced a record.
+  screenshot: assets/dashboards/warehouse-a-source-inventory.svg
+  panels:
+    - title: Files per agent
+      query: count_distinct(records.source.path) by agent.id
+      fields: [source.path, agent.id]
+    - title: Last record per file
+      query: max(records.timestamp) by source.path
+      fields: [timestamp, source.path]

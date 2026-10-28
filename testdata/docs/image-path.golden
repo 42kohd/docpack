@@ -1,0 +1,2 @@
+docs/image-path.md:10  image-path  Image path "../outside.png" is not under assets/. Put the file in the project's assets/ directory and write the path as assets/<file>
+docs/image-path.md:12  image-path  Image path "images/x.png" is not under assets/. Put the file in the project's assets/ directory and write the path as assets/<file>

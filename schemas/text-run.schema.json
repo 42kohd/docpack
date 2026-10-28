@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/text-run.schema.json",
+  "title": "Text run",
+  "description": "One span of inline text with its attributes. Absent booleans are false.",
+  "type": "object",
+  "required": ["t"],
+  "additionalProperties": false,
+  "properties": {
+    "t": {"type": "string", "minLength": 1},
+    "bold": {"const": true},
+    "italic": {"const": true},
+    "code": {"const": true},
+    "link": {"type": "string", "pattern": "^(https://\\S+|doc:[a-z0-9]+(-[a-z0-9]+)*(#[a-z0-9]+(-[a-z0-9]+)*)?)$"},
+    "flag": {"const": true},
+    "field": {"const": true}
+  },
+  "$defs": {
+    "runs": {"type": "array", "items": {"$ref": "#"}, "minItems": 1}
+  }
+}

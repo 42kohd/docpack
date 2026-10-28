@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/data/flags.schema.json",
+  "title": "Flags",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["name", "group", "type", "description", "platforms", "status"],
+    "additionalProperties": false,
+    "properties": {
+      "name": {"type": "string", "pattern": "^--?[a-z0-9][a-z0-9-]*$"},
+      "group": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+      "type": {"enum": ["string", "int", "bool", "duration", "path", "list"]},
+      "default": {"type": ["string", "number", "boolean", "null"]},
+      "env": {"type": "string", "pattern": "^([A-Z][A-Z0-9_]*)?$"},
+      "description": {"type": "string", "minLength": 1},
+      "platforms": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+      "status": {"enum": ["ga", "prerelease", "deprecated"]},
+      "replaced_by": {"type": "string", "pattern": "^--?[a-z0-9][a-z0-9-]*$"},
+      "since": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+    },
+    "if": {"properties": {"status": {"const": "deprecated"}}},
+    "then": {"required": ["replaced_by"]}
+  }
+}

@@ -1,0 +1,1 @@
+docs/template-inline.md:10  template-inline  {{ … }} inside a paragraph. Put the reference expression alone in its own paragraph, for example {{ flags group="core" }}

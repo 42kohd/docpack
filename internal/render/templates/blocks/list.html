@@ -1,0 +1,2 @@
+{{define "block/list"}}{{if .Ordered}}<ol>{{template "items" .Items}}</ol>{{else}}<ul>{{template "items" .Items}}</ul>{{end}}{{end}}
+{{define "items"}}{{range .}}<li>{{template "runs" .Text}}{{if .Items}}<ul>{{template "items" .Items}}</ul>{{end}}</li>{{end}}{{end}}

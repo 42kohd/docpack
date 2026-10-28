@@ -1,0 +1,4 @@
+{{define "block/steps"}}<ol class="steps">
+{{range .Steps}}<li class="step"><p class="step-title">{{sub .Title}}</p>
+{{range .Body}}{{render .}}{{end}}</li>
+{{end}}</ol>{{end}}

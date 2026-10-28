@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/data/dashboards.schema.json",
+  "title": "Dashboards for one forwarder target",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "title", "purpose", "panels"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+      "title": {"type": "string", "minLength": 1},
+      "purpose": {"type": "string", "minLength": 1},
+      "screenshot": {"type": "string", "pattern": "^assets/"},
+      "panels": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["title", "query", "fields"],
+          "additionalProperties": false,
+          "properties": {
+            "title": {"type": "string", "minLength": 1},
+            "query": {"type": "string", "minLength": 1},
+            "fields": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+          }
+        }
+      }
+    }
+  }
+}

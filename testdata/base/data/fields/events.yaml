@@ -1,0 +1,12 @@
+- name: event.name
+  type: string
+  required: true
+  description: Name of the event.
+  example: start
+  levels: [minimal]
+- name: event.time
+  type: timestamp
+  required: true
+  description: When it happened.
+  example: "2026-01-02T03:04:05Z"
+  levels: [minimal]

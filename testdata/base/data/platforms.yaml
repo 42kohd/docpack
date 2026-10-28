@@ -1,0 +1,12 @@
+- os: linux
+  version: Kernel 5+
+  arch: [amd64, arm64]
+  capabilities: {watch: true}
+- os: windows
+  version: Windows 11
+  arch: [amd64]
+  capabilities: {watch: true}
+- os: macos
+  version: macOS 14
+  arch: [arm64]
+  capabilities: {watch: false}

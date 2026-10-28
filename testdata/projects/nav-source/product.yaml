@@ -1,0 +1,14 @@
+name: Tidewatch
+short: tw
+binary: tidewatch
+version: 2.0.1
+support_email: help@example.com
+nav:
+  - group: Start
+    items: [index, guide, setup, sink]
+  - group: Dashboards
+    from: dashboards/sink
+  - group: Elsewhere
+    from: dashboards/nowhere
+  - group: Releases
+    from: releases

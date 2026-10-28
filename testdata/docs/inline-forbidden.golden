@@ -1,0 +1,2 @@
+docs/inline-forbidden.md:10  inline-forbidden  Autolink <https://example.com>. Write it as a link with words: [what the page is](https://…)
+docs/inline-forbidden.md:10  inline-forbidden  Image inside a line of text. Put the image on its own line, as its own paragraph

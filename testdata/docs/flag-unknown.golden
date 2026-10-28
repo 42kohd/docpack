@@ -1,0 +1,1 @@
+docs/flag-unknown.md:10  flag-unknown  warning: Flag --delta is not in data/flags.yaml. Check the spelling, or add the flag to data/flags.yaml

@@ -1,0 +1,25 @@
+- name: --alpha
+  group: core
+  type: string
+  default: a
+  env: TW_ALPHA
+  description: The alpha setting.
+  platforms: [linux, windows, macos]
+  status: ga
+- name: --beta
+  group: core
+  type: int
+  default: 1
+  env: ""
+  description: Former name of --alpha.
+  platforms: [linux]
+  status: deprecated
+  replaced_by: --alpha
+- name: --gamma
+  group: io
+  type: bool
+  default: false
+  env: TW_GAMMA
+  description: The gamma switch.
+  platforms: [linux, macos]
+  status: ga

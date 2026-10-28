@@ -1,0 +1,2 @@
+docs/container-unclosed.md:8  section-missing  No ## Related section. Add ## Related as the last section, with ::: cards linking to related documents
+docs/container-unclosed.md:10  container-unclosed  ::: note is never closed, so it runs to the end of the file. Add a line containing only ::: where the container ends

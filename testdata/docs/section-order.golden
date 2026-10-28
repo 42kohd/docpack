@@ -1,0 +1,1 @@
+docs/section-order.md:13  section-order  ## Goal comes after ## Steps. Move ## Goal before ## Steps; the order is: Goal (required), Prerequisites, Steps (required), Result (required), Options, Related (required)

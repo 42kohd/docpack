@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" font-family="system-ui, sans-serif" font-size="13">
+<rect width="800" height="460" fill="#f4f5f6"/>
+<rect width="800" height="44" fill="#5b4a9e"/>
+<text x="20" y="28" fill="#fff" font-size="16" font-weight="700">Agent fleet</text>
+<text x="780" y="28" fill="#fff" text-anchor="end" opacity=".8">last 24 hours</text>
+<rect x="20" y="64" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="34" y="88" fill="#1d2226" font-weight="600">Agents reporting</text>
+<polyline points="34.0,164.1 48.9,181.8 63.7,183.9 78.6,195.5 93.5,213.7 108.3,202.8 123.2,213.8 138.1,213.8 153.0,205.6 167.8,203.5 182.7,209.9 197.6,209.2 212.4,207.2 227.3,196.8 242.2,211.2 257.0,209.0 271.9,213.8 286.8,213.8 301.7,203.8 316.5,203.6 331.4,201.3 346.3,191.8 361.1,176.7 376.0,178.8" fill="none" stroke="#5b4a9e" stroke-width="2"/>
+<line x1="34" y1="226" x2="376" y2="226" stroke="#dde0e3"/>
+<rect x="410" y="64" width="370" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="424" y="88" fill="#1d2226" font-weight="600">Input files per agent</text>
+<rect x="428.0" y="145.6" width="49.0" height="80.4" rx="3" fill="#5b4a9e" opacity="0.45"/>
+<rect x="485.0" y="155.3" width="49.0" height="70.7" rx="3" fill="#5b4a9e" opacity="0.54"/>
+<rect x="542.0" y="154.7" width="49.0" height="71.3" rx="3" fill="#5b4a9e" opacity="0.63"/>
+<rect x="599.0" y="138.2" width="49.0" height="87.8" rx="3" fill="#5b4a9e" opacity="0.72"/>
+<rect x="656.0" y="160.2" width="49.0" height="65.8" rx="3" fill="#5b4a9e" opacity="0.81"/>
+<rect x="713.0" y="152.8" width="49.0" height="73.2" rx="3" fill="#5b4a9e" opacity="0.90"/>
+<rect x="20" y="262" width="760" height="178" rx="8" fill="#fff" stroke="#dde0e3"/>
+<text x="34" y="286" fill="#1d2226" font-weight="600">Queue depth</text>
+<polyline points="34.0,363.8 65.8,347.6 97.7,340.4 129.5,326.6 161.3,310.4 193.1,319.2 225.0,317.0 256.8,308.1 288.6,308.1 320.4,321.4 352.3,335.2 384.1,337.3 415.9,353.0 447.7,362.5 479.6,378.1 511.4,371.9 543.2,361.5 575.0,347.0 606.9,359.6 638.7,351.7 670.5,345.9 702.3,358.9 734.2,344.9 766.0,327.8" fill="none" stroke="#5b4a9e" stroke-width="2"/>
+<line x1="34" y1="424" x2="766" y2="424" stroke="#dde0e3"/>
+</svg>

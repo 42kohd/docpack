@@ -1,0 +1,7 @@
+- id: main
+  title: Main
+  purpose: The main view.
+  panels:
+    - title: Events
+      query: count(events)
+      fields: [event.name]

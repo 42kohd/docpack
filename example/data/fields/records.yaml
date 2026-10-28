@@ -1,0 +1,60 @@
+- name: timestamp
+  type: timestamp
+  required: true
+  description: When the agent read the line, in UTC.
+  example: "2026-03-14T10:22:31.104Z"
+  levels: [minimal, standard, verbose]
+- name: message
+  type: string
+  required: true
+  description: The text of the record, without the trailing newline.
+  example: "GET /health 200 3ms"
+  levels: [minimal, standard, verbose]
+- name: source.path
+  type: string
+  required: true
+  description: Absolute path of the file the record came from.
+  example: /var/log/app/web.log
+  levels: [minimal, standard, verbose]
+- name: source.host
+  type: string
+  required: true
+  description: Host name of the machine running the agent.
+  example: web-07
+  levels: [standard, verbose]
+- name: source.offset
+  type: int
+  required: false
+  description: Byte offset of the record in the source file.
+  example: 482113
+  levels: [verbose]
+- name: level
+  type: string
+  required: false
+  description: Log level detected in the line, when the line has one.
+  example: warn
+  levels: [standard, verbose]
+- name: agent.id
+  type: string
+  required: true
+  description: Stable identifier of the agent, kept in the state directory.
+  example: a1f4c9
+  levels: [standard, verbose]
+- name: batch.id
+  type: string
+  required: false
+  description: Identifier of the batch that carried the record. Repeats after a retry.
+  example: b-20260314-000918
+  levels: [verbose]
+- name: labels
+  type: object
+  required: false
+  description: Key and value pairs set in the input configuration.
+  example: "team=payments"
+  levels: [standard, verbose]
+- name: multiline
+  type: bool
+  required: false
+  description: True when the record was joined from more than one line.
+  example: false
+  levels: [verbose]
