@@ -4,7 +4,7 @@ You write each page as a Markdown file, `docpack check` tells you exactly what
 to fix, and you send one zip. The full dialect is in [SPEC.md](../SPEC.md).
 
 **1. Install.** With Go 1.22 or later:
-`go install github.com/42kohd/docpack/cmd/docpack@v0.1.0`.
+`go install github.com/42kohd/docpack/cmd/docpack@v0.1.1`.
 Without Go, download your OS's archive and `checksums.txt` from
 <https://github.com/42kohd/docpack/releases> (`arm64` for Apple silicon and
 ARM, `amd64` otherwise), check it (`sha256sum --ignore-missing -c checksums.txt`;

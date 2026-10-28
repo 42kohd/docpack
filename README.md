@@ -56,7 +56,7 @@ docs/install.md:31  cmd-missing-variant  Command "Start the agent" has no macos:
 With Go 1.22 or later, one line installs the binary into `$(go env GOPATH)/bin`:
 
 ```text
-go install github.com/42kohd/docpack/cmd/docpack@v0.1.0
+go install github.com/42kohd/docpack/cmd/docpack@v0.1.1
 ```
 
 Without Go, download the archive for your platform and `checksums.txt` from
@@ -80,8 +80,8 @@ SPEC.md  README.md  CHANGELOG.md  LICENSE
 
 ## Verifying what you run
 
-- **The source is the tag.** `go install …@v0.1.0` builds the code at tag
-  `v0.1.0` of this repository. The Go checksum database
+- **The source is the tag.** `go install …@v0.1.1` builds the code at tag
+  `v0.1.1` of this repository. The Go checksum database
   (`sum.golang.org`) records the module's hash the first time anyone fetches
   that version, so every later download must match it.
 - **The release binaries are built from that tag.** The release workflow
@@ -94,7 +94,7 @@ SPEC.md  README.md  CHANGELOG.md  LICENSE
   ```text
   Linux:    sha256sum --ignore-missing -c checksums.txt
   macOS:    shasum -a 256 --ignore-missing -c checksums.txt
-  Windows:  (Get-FileHash docpack_0.1.0_windows_amd64.zip).Hash   # compare with its line in checksums.txt
+  Windows:  (Get-FileHash docpack_0.1.1_windows_amd64.zip).Hash   # compare with its line in checksums.txt
   ```
 
 - **Check the signature on the checksums** (releases from v0.1.1 on). The

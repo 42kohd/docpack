@@ -2,7 +2,7 @@
 
 Dates are UTC.
 
-## Unreleased
+## 0.1.1 — 2026-10-28
 
 - `go install github.com/42kohd/docpack/cmd/docpack@<version>` is the primary
   install; `docpack version` reports the module version for such builds.
