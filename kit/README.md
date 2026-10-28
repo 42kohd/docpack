@@ -3,16 +3,20 @@
 You write each page as a Markdown file, `docpack check` tells you exactly what
 to fix, and you send one zip. The full dialect is in [SPEC.md](../SPEC.md).
 
-**1. Install.** Download the archive for your OS from
+**1. Install.** With Go 1.22 or later:
+`go install github.com/42kohd/docpack/cmd/docpack@v0.1.0`.
+Without Go, download your OS's archive and `checksums.txt` from
 <https://github.com/42kohd/docpack/releases> (`arm64` for Apple silicon and
-ARM machines, `amd64` otherwise), then put it on your PATH:
+ARM, `amd64` otherwise), check it (`sha256sum --ignore-missing -c checksums.txt`;
+on macOS `shasum -a 256 …`; see "Verifying what you run" in the
+[main README](../README.md) for Windows and signatures), then put it on your PATH:
 
 - Windows (PowerShell): `Expand-Archive docpack_*_windows_amd64.zip $HOME\docpack; [Environment]::SetEnvironmentVariable("Path", "$env:Path;$HOME\docpack", "User")`
 - macOS: `mkdir -p ~/docpack && tar -xzf docpack_*_darwin_arm64.tar.gz -C ~/docpack && xattr -cr ~/docpack && echo 'export PATH="$HOME/docpack:$PATH"' >> ~/.zshrc`
 - Linux: `mkdir -p ~/docpack && tar -xzf docpack_*_linux_amd64.tar.gz -C ~/docpack && echo 'export PATH="$HOME/docpack:$PATH"' >> ~/.bashrc`
 
 Open a new terminal and run `docpack version`. This kit is the `kit/` folder
-next to the binary.
+of the archive, or of the repository if you used `go install`.
 
 **2. Start a project.** In an empty folder run `docpack init <short-name>`
 (for example `docpack init acme`), then replace every `_fill:` value in

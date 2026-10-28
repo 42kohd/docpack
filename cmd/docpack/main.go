@@ -18,6 +18,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"runtime/debug"
 	"sort"
 	"strings"
 
@@ -27,7 +28,18 @@ import (
 	"github.com/42kohd/docpack/kit"
 )
 
-var version = "0.1.0-dev" // set by goreleaser from the tag
+// version is set by goreleaser from the tag. A binary built with
+// go install reports the module version instead (see init).
+var version = "dev"
+
+func init() {
+	if version != "dev" {
+		return
+	}
+	if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "" && info.Main.Version != "(devel)" {
+		version = strings.TrimPrefix(info.Main.Version, "v")
+	}
+}
 
 const usage = `docpack checks product documentation and compiles it into a package.
 

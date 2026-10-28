@@ -53,14 +53,22 @@ docs/install.md:31  cmd-missing-variant  Command "Start the agent" has no macos:
 
 ## Install
 
-Download the archive for your platform from the
-[Releases page](https://github.com/42kohd/docpack/releases) (Linux, macOS and
-Windows, each for amd64 and arm64), unpack it into a folder and put that
-folder on your PATH. [`kit/README.md`](kit/README.md) has the one-line command
-for each OS. With a Go toolchain you can build from source instead:
-`go build ./cmd/docpack`.
+With Go 1.22 or later, one line installs the binary into `$(go env GOPATH)/bin`:
 
-Each archive unpacks to:
+```text
+go install github.com/42kohd/docpack/cmd/docpack@v0.1.0
+```
+
+Without Go, download the archive for your platform and `checksums.txt` from
+the [Releases page](https://github.com/42kohd/docpack/releases) (Linux, macOS
+and Windows, each for amd64 and arm64). Check the archive against
+`checksums.txt` as shown under "Verifying what you run", then unpack it into a
+folder and put that folder on your PATH. [`kit/README.md`](kit/README.md) has
+the one-line command for each OS.
+
+`go install` gives you only the binary. The author kit is the
+[`kit/`](kit/) folder of this repository, and every release archive carries a
+copy:
 
 ```text
 docpack (docpack.exe on Windows)   the binary
@@ -69,6 +77,46 @@ kit/                               start here: kit/README.md, then skeletons/,
 schemas/1.0/                       the package JSON Schemas
 SPEC.md  README.md  CHANGELOG.md  LICENSE
 ```
+
+## Verifying what you run
+
+- **The source is the tag.** `go install …@v0.1.0` builds the code at tag
+  `v0.1.0` of this repository. The Go checksum database
+  (`sum.golang.org`) records the module's hash the first time anyone fetches
+  that version, so every later download must match it.
+- **The release binaries are built from that tag.** The release workflow
+  (`.github/workflows/release.yml`) runs on the tag push, runs the tests, and
+  builds every archive with goreleaser on GitHub's runners. Nobody uploads
+  binaries by hand.
+- **Compare checksums.** `checksums.txt` lists the SHA-256 of every archive.
+  In the folder with the downloads:
+
+  ```text
+  Linux:    sha256sum --ignore-missing -c checksums.txt
+  macOS:    shasum -a 256 --ignore-missing -c checksums.txt
+  Windows:  (Get-FileHash docpack_0.1.0_windows_amd64.zip).Hash   # compare with its line in checksums.txt
+  ```
+
+- **Check the signature on the checksums** (releases from v0.1.1 on). The
+  release workflow signs `checksums.txt` with [cosign](https://github.com/sigstore/cosign)
+  keyless signing, so the signature is bound to this repository's release
+  workflow rather than to a key someone holds. The bundle ships as
+  `checksums.txt.sigstore.json`:
+
+  ```text
+  cosign verify-blob checksums.txt \
+    --bundle checksums.txt.sigstore.json \
+    --certificate-identity-regexp '^https://github.com/42kohd/docpack/\.github/workflows/release\.yml@refs/tags/v' \
+    --certificate-oidc-issuer https://token.actions.githubusercontent.com
+  ```
+
+- **Check the build provenance** (releases from v0.1.1 on). Every archive
+  and `checksums.txt` carries a SLSA build provenance attestation that names
+  the commit and workflow that built it. With the GitHub CLI 2.49 or later:
+
+  ```text
+  gh attestation verify docpack_0.1.1_linux_amd64.tar.gz --repo 42kohd/docpack
+  ```
 
 ## Start a project
 

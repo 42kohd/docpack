@@ -37,6 +37,20 @@ archives:
 checksum:
   name_template: checksums.txt
 
+# Keyless signing: cosign gets a short-lived certificate for the release
+# workflow's GitHub OIDC identity and records the signature in the public
+# transparency log. The bundle holds the signature and the certificate.
+signs:
+  - id: cosign
+    cmd: cosign
+    artifacts: checksum
+    signature: "${artifact}.sigstore.json"
+    args:
+      - sign-blob
+      - "--bundle=${signature}"
+      - "${artifact}"
+      - "--yes"
+
 snapshot:
   version_template: "{{ incpatch .Version }}-next"
 

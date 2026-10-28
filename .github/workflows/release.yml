@@ -1,12 +1,14 @@
 name: release
 
-# Runs when a version tag is pushed, for example: git tag v0.1.0 && git push origin v0.1.0
+# Runs when a version tag is pushed, for example: git tag v0.1.1 && git push origin v0.1.1
 on:
   push:
     tags: ["v*"]
 
 permissions:
-  contents: write
+  contents: write     # create the release and upload assets
+  id-token: write     # OIDC identity for cosign keyless signing and attestations
+  attestations: write # store the build provenance attestations
 
 jobs:
   release:
@@ -20,6 +22,7 @@ jobs:
           go-version-file: go.mod
       - name: Test before releasing
         run: go test ./... && go run ./cmd/docpack check example/ --warnings-as-errors
+      - uses: sigstore/cosign-installer@v3
       - uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
@@ -27,3 +30,10 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Attest build provenance (SLSA)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            dist/*.tar.gz
+            dist/*.zip
+            dist/checksums.txt

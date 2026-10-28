@@ -127,3 +127,24 @@ empty lists. To make that hold, `fill-left` also scans `product.yaml` and
 still hold `_fill:`, and the literal-name checks wait until the name is real.
 `testdata/init/filled/` holds the filled-in files, and a test proves both
 states.
+
+## D16. Install with go install; verify releases with cosign and provenance
+
+`go install …/cmd/docpack@<tag>` is the primary install, since it builds from
+the tagged source and the Go checksum database pins the module. The release
+archives, with the kit and schemas, are the fallback for machines without Go.
+`docpack version` falls back to the module version recorded by Go when
+goreleaser did not stamp one.
+
+Releases are verifiable two ways, both through official actions and both with
+no long-lived keys:
+
+- goreleaser signs `checksums.txt` with cosign keyless signing
+  (`sigstore/cosign-installer`). The bundle `checksums.txt.sigstore.json`
+  holds a certificate for the identity of `release.yml` at the tag.
+- `actions/attest-build-provenance` records SLSA build provenance for every
+  archive and for `checksums.txt`, which `gh attestation verify` checks.
+
+Only `checksums.txt` is signed. Each archive is covered through its checksum
+and its own attestation. CI runs `goreleaser check`; the signing and
+attestation steps themselves only run on a tag push.

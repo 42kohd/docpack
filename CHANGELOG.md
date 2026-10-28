@@ -2,6 +2,14 @@
 
 Dates are UTC.
 
+## Unreleased
+
+- `go install github.com/42kohd/docpack/cmd/docpack@<version>` is the primary
+  install; `docpack version` reports the module version for such builds.
+- Releases sign `checksums.txt` with cosign keyless signing
+  (`checksums.txt.sigstore.json`) and attach SLSA build provenance
+  attestations to every archive. README: "Verifying what you run".
+
 ## 0.1.0 — 2026-10-28
 
 First release.
