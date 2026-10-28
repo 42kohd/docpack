@@ -78,3 +78,69 @@ func TestUsageErrors(t *testing.T) {
 		t.Errorf("version: %d %q", code, stdout)
 	}
 }
+
+// TestInit: a fresh project fails only on its _fill: markers, and once the
+// markers are replaced (testdata/init/filled) it passes.
+func TestInit(t *testing.T) {
+	dir := t.TempDir()
+	code, stdout, stderr := runCLI("init", "acme", "--dir", dir)
+	if code != 0 {
+		t.Fatalf("init: exit %d %s", code, stderr)
+	}
+	if !strings.Contains(stdout, "created a docpack project") {
+		t.Errorf("init output: %q", stdout)
+	}
+	for _, f := range []string{"product.yaml", "data/flags.yaml", "data/platforms.yaml", "data/datasets.yaml",
+		"data/releases.yaml", "data/fields/.gitkeep", "data/dashboards/.gitkeep", "docs/index.md", "assets/.gitkeep", ".gitignore"} {
+		if _, err := os.Stat(filepath.Join(dir, f)); err != nil {
+			t.Errorf("init did not create %s", f)
+		}
+	}
+	if gi, _ := os.ReadFile(filepath.Join(dir, ".gitignore")); string(gi) != "dist/\n" {
+		t.Errorf(".gitignore = %q", gi)
+	}
+
+	code, stdout, _ = runCLI("check", dir, "--format", "json")
+	if code != 1 {
+		t.Fatalf("check of a fresh init: exit %d, want 1", code)
+	}
+	var diags []map[string]any
+	if err := json.Unmarshal([]byte(stdout), &diags); err != nil {
+		t.Fatal(err)
+	}
+	files := map[string]bool{}
+	for _, d := range diags {
+		if d["rule"] != "fill-left" {
+			t.Errorf("fresh init must report only fill-left, got %v", d)
+		}
+		files[d["file"].(string)] = true
+	}
+	if !files["product.yaml"] || !files["docs/index.md"] || len(files) != 2 {
+		t.Errorf("fill-left should cover exactly product.yaml and docs/index.md, got %v", files)
+	}
+
+	filled := filepath.Join("..", "..", "testdata", "init", "filled")
+	for _, f := range []string{"product.yaml", "docs/index.md"} {
+		b, err := os.ReadFile(filepath.Join(filled, f))
+		if err != nil {
+			t.Fatal(err)
+		}
+		os.WriteFile(filepath.Join(dir, f), b, 0o644)
+	}
+	code, stdout, stderr = runCLI("check", dir, "--warnings-as-errors")
+	if code != 0 {
+		t.Fatalf("check after filling: exit %d\n%s%s", code, stdout, stderr)
+	}
+	if _, err := os.Stat(filepath.Join(dir, "dist", "acme-0.3.0.zip")); err != nil {
+		t.Error("filled project did not produce dist/acme-0.3.0.zip")
+	}
+
+	if code, _, _ := runCLI("init", "acme", "--dir", dir); code != 1 {
+		t.Error("init must refuse a directory that already has a project")
+	}
+	for _, args := range [][]string{{"init"}, {"init", "Bad Name", "--dir", t.TempDir()}} {
+		if code, _, _ := runCLI(args...); code != 2 {
+			t.Errorf("%v: exit %d, want 2", args, code)
+		}
+	}
+}

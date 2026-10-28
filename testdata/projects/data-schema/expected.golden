@@ -1,4 +1,4 @@
-data/platforms.yaml:3  data-schema  At 0.arch.0: value must be one of 'amd64', 'arm64'. Correct the value to match schemas/data/platforms.schema.json
-data/platforms.yaml:5  data-schema  At 1: additional properties 'colour' not allowed. Correct the value to match schemas/data/platforms.schema.json
-data/platforms.yaml:5  data-schema  At 1: missing property 'version'. Correct the value to match schemas/data/platforms.schema.json
-data/platforms.yaml:7  data-schema  At 1.capabilities.watch: got string, want boolean. Correct the value to match schemas/data/platforms.schema.json
+data/platforms.yaml:3  data-schema  At 0.arch.0: value must be one of 'amd64', 'arm64'. Correct the value to match schemas/1.0/data/platforms.schema.json
+data/platforms.yaml:5  data-schema  At 1: additional properties 'colour' not allowed. Correct the value to match schemas/1.0/data/platforms.schema.json
+data/platforms.yaml:5  data-schema  At 1: missing property 'version'. Correct the value to match schemas/1.0/data/platforms.schema.json
+data/platforms.yaml:7  data-schema  At 1.capabilities.watch: got string, want boolean. Correct the value to match schemas/1.0/data/platforms.schema.json

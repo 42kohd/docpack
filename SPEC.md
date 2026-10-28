@@ -1,7 +1,7 @@
 # docpack specification
 
 Version 1.0 of the docpack dialect and package format. This document is
-normative: the checker, the schemas in `schemas/` and the kit all conform to it.
+normative: the checker, the schemas in `schemas/1.0/` and the kit all conform to it.
 The key words MUST, MUST NOT, SHOULD and MAY are used as in RFC 2119.
 
 The specification has two halves:
@@ -9,7 +9,7 @@ The specification has two halves:
 1. **The dialect** (part A): what documentation authors write — Markdown files,
    YAML data files and a `product.yaml`.
 2. **The package** (part B): what `docpack check` emits — a zip of JSON files
-   that validates against `schemas/` and that any consumer can import.
+   that validates against `schemas/1.0/` and that any consumer can import.
 
 ---
 
@@ -267,7 +267,7 @@ MUST NOT remain anywhere in a document.
 
 ## A6. Data files
 
-Each data file has a JSON Schema in `schemas/data/`. Every file is a YAML list
+Each data file has a JSON Schema in `schemas/1.0/data/`. Every file is a YAML list
 at the top level.
 
 **`data/flags.yaml`** — one entry per flag:
@@ -372,7 +372,7 @@ missing YAML file produces no JSON file). `assets/` is a copy of the project's
 
 ## B2. manifest.json
 
-Validates against `schemas/manifest.schema.json`.
+Validates against `schemas/1.0/manifest.schema.json`.
 
 ```json
 {
@@ -402,7 +402,7 @@ the title to show (`nav_title` if set, else `title`). A node has `doc`, or
 
 ## B3. Documents
 
-`documents/<slug>.json` validates against `schemas/document.schema.json`. Its
+`documents/<slug>.json` validates against `schemas/1.0/document.schema.json`. Its
 header fields are the frontmatter keys (A2.1), with the same names; `body` is
 the ordered list of top-level blocks — always `section` blocks.
 
@@ -421,7 +421,7 @@ the ordered list of top-level blocks — always `section` blocks.
 ### B3.0 Text runs
 
 Inline text is an array of runs, each validated by
-`schemas/text-run.schema.json`. A run is `{t, bold?, italic?, code?, link?,
+`schemas/1.0/text-run.schema.json`. A run is `{t, bold?, italic?, code?, link?,
 flag?, field?}`; absent booleans are false. Adjacent runs with identical
 attributes are merged. `link` is the destination as written (`https://…` or
 `doc:slug#id`). Placeholders stay unsubstituted.
@@ -558,17 +558,20 @@ An item MAY carry `section` when the link names one.
 ## B4. product.json and data
 
 `product.json` holds `name`, `short`, `binary`, `version` and `support_email`
-and validates against `schemas/product.schema.json` (navigation is in the
+and validates against `schemas/1.0/product.schema.json` (navigation is in the
 manifest, resolved). Each `data/*.json` validates against the matching schema
-in `schemas/data/`.
+in `schemas/1.0/data/`.
 
 ## B5. Versioning
 
 `schema_version` is `MAJOR.MINOR`, starting at `1.0`. Adding an optional field
 or a new block type bumps MINOR; consumers MUST ignore fields they do not know
 and SHOULD render unknown block types as nothing. Removing or changing the
-meaning of anything bumps MAJOR. Schemas for each version stay published at the
-same path in this repository's history.
+meaning of anything bumps MAJOR. The schemas of each version live in
+`schemas/<version>/`, and every `$id` is the raw URL of its file on the `main`
+branch, for example
+`https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/block.schema.json`.
+A new version gets a new directory; published directories do not change.
 
 ---
 

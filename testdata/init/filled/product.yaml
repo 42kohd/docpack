@@ -1,0 +1,12 @@
+# Product facts. Replace every _fill: value, then run docpack check.
+name: Acme Relay
+short: acme
+binary: acme-relay
+version: 0.3.0
+support_email: support@example.com
+nav:
+  - group: Get started
+    items:
+      - index
+  - group: Releases
+    from: releases

@@ -1,5 +1,5 @@
 // Package schema validates YAML data and compiled JSON against the embedded
-// schemas in the repository's schemas/ directory.
+// schemas in the repository's schemas/<version>/ directory.
 package schema
 
 import (
@@ -16,7 +16,8 @@ import (
 	"github.com/42kohd/docpack/schemas"
 )
 
-// Names of the schemas, as paths relative to schemas/ without the suffix.
+// Names of the schemas, as paths relative to schemas/<version>/ without the
+// suffix.
 const (
 	Manifest  = "manifest"
 	Document  = "document"
@@ -28,6 +29,9 @@ const (
 	Dashboard = "data/dashboards"
 	Releases  = "data/releases"
 )
+
+// Dir is the versioned schema directory, as it appears in messages.
+const Dir = schemas.Version + "/"
 
 // Problem is one validation failure. Pointer is a JSON pointer into the
 // instance ("" is the root).
@@ -56,11 +60,15 @@ func Load() (*Validator, error) {
 func load() (*Validator, error) {
 	c := jsonschema.NewCompiler()
 	var names []string
-	err := fs.WalkDir(schemas.FS, ".", func(path string, d fs.DirEntry, err error) error {
+	dir, err := fs.Sub(schemas.FS, schemas.Version)
+	if err != nil {
+		return nil, err
+	}
+	err = fs.WalkDir(dir, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil || d.IsDir() || !strings.HasSuffix(path, ".schema.json") {
 			return err
 		}
-		raw, err := schemas.FS.ReadFile(path)
+		raw, err := fs.ReadFile(dir, path)
 		if err != nil {
 			return err
 		}

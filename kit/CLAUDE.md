@@ -1,10 +1,11 @@
 # Writing docs in this project (for Claude Code, Cursor and similar tools)
 
 This project's documentation is written in the docpack dialect and checked with
-`docpack check`. The full rules are in `prompts/SYSTEM.md`; read it before
-editing any file in `docs/`. The short version:
+`docpack check`. The full rules are in `kit/prompts/SYSTEM.md` of the docpack
+download; read it before editing any file in `docs/`. The short version:
 
-- Start a document with `docpack new <type> <slug>`. Never create one by hand.
+- Start a project with `docpack init <short-name>` and a document with
+  `docpack new <type> <slug>`. Never create one by hand.
 - Replace every `_fill:` line. Never add, rename, remove or reorder `##`
   sections, and never add frontmatter keys.
 - Use only the constructs in the table in SYSTEM.md. No HTML, no emoji, no `#`

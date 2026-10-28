@@ -35,6 +35,7 @@ literal product name and version numbers never appear in prose.
 ## Commands
 
 ```text
+docpack init <short-name>    create a project in the current directory
 docpack check [dir]          check everything; on success write dist/<short>-<version>.zip
 docpack pack [dir]           the same for scripts: diagnostics to stderr, zip path to stdout
 docpack new <type> <slug>    write a skeleton page to docs/<slug>.md
@@ -52,11 +53,22 @@ docs/install.md:31  cmd-missing-variant  Command "Start the agent" has no macos:
 
 ## Install
 
-Download the archive for your platform from the Releases page of this
-repository (Linux, macOS and Windows, each for amd64 and arm64), unpack it and
-put `docpack` on your path. The archive also contains the author kit and the
-schemas. With a Go toolchain you can build from source instead:
+Download the archive for your platform from the
+[Releases page](https://github.com/42kohd/docpack/releases) (Linux, macOS and
+Windows, each for amd64 and arm64), unpack it into a folder and put that
+folder on your PATH. [`kit/README.md`](kit/README.md) has the one-line command
+for each OS. With a Go toolchain you can build from source instead:
 `go build ./cmd/docpack`.
+
+Each archive unpacks to:
+
+```text
+docpack (docpack.exe on Windows)   the binary
+kit/                               start here: kit/README.md, then skeletons/,
+                                   examples/, prompts/ and CLAUDE.md
+schemas/1.0/                       the package JSON Schemas
+SPEC.md  README.md  CHANGELOG.md  LICENSE
+```
 
 ## Start a project
 
@@ -69,9 +81,10 @@ my-docs/
 └── assets/           images and icons
 ```
 
-1. Write `product.yaml` (see `example/product.yaml`).
-2. Run `docpack new landing index`, then `docpack new howto <slug>` for each
-   page, and add each slug to `nav`.
+1. In an empty folder, run `docpack init <short-name>`. It writes
+   `product.yaml`, empty data files, `docs/index.md` and a `.gitignore`.
+2. Fill in `product.yaml`, then run `docpack new howto <slug>` (or another
+   type) for each page and add each slug to `nav`.
 3. Replace every `_fill:` line. The `kit/` directory has the author's guide,
    three finished examples and prompts for writing pages with a language
    model.
@@ -85,7 +98,8 @@ my-docs/
 
 [SPEC.md](SPEC.md) is normative: the dialect, the data files, the package
 layout, the JSON for all twelve block types and the stable rule ids. The JSON
-Schemas (2020-12) are in [`schemas/`](schemas/), and the choices behind them
+Schemas (2020-12) are in [`schemas/1.0/`](schemas/1.0/); each `$id` is the raw
+URL of its file, so the schemas resolve directly. The choices behind them
 are recorded in [DECISIONS.md](DECISIONS.md).
 
 ## Why the dialect is closed

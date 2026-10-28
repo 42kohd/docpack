@@ -1,6 +1,7 @@
 // Command docpack checks product documentation written in the docpack
 // dialect and compiles it into a validated package.
 //
+//	docpack init <short>         create a project in the current directory
 //	docpack check [dir]          check, and on success write dist/<short>-<version>.zip
 //	docpack pack [dir]           the same, quiet: prints only the zip path
 //	docpack new <type> <slug>    write a skeleton to docs/<slug>.md
@@ -17,6 +18,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
 
 	"github.com/42kohd/docpack/internal/compile"
@@ -30,6 +32,7 @@ var version = "0.1.0-dev" // set by goreleaser from the tag
 const usage = `docpack checks product documentation and compiles it into a package.
 
 Usage:
+  docpack init  <short-name> [--dir dir]
   docpack check [dir] [--format text|json] [--warnings-as-errors] [--out dir]
   docpack pack  [dir] [--warnings-as-errors] [--out dir]
   docpack new   <type> <slug> [--dir dir]
@@ -114,6 +117,8 @@ func run(args []string, stdout, stderr io.Writer) int {
 		return check(o, false, stdout, stderr)
 	case "pack":
 		return check(o, true, stdout, stderr)
+	case "init":
+		return initProject(o, stdout, stderr)
 	case "new":
 		return newDoc(o, stdout, stderr)
 	case "serve":
@@ -233,6 +238,49 @@ func newDoc(o opts, stdout, stderr io.Writer) int {
 		return 2
 	}
 	fmt.Fprintf(stdout, "wrote %s; replace every _fill: line, add %s to nav in product.yaml, then run docpack check\n", path, slug)
+	return 0
+}
+
+func initProject(o opts, stdout, stderr io.Writer) int {
+	if len(o.args) != 1 {
+		fmt.Fprintln(stderr, "docpack init: usage: docpack init <short-name>")
+		return 2
+	}
+	files, err := kit.Init(o.args[0])
+	if err != nil {
+		fmt.Fprintln(stderr, "docpack init:", err)
+		return 2
+	}
+	dir := o.dir
+	if dir == "" {
+		dir = "."
+	}
+	paths := make([]string, 0, len(files))
+	for p := range files {
+		paths = append(paths, p)
+		if _, err := os.Stat(filepath.Join(dir, filepath.FromSlash(p))); err == nil && p != ".gitignore" {
+			fmt.Fprintf(stderr, "docpack init: %s already exists; run init in an empty directory\n", filepath.Join(dir, p))
+			return 1
+		}
+	}
+	sort.Strings(paths)
+	for _, p := range paths {
+		target := filepath.Join(dir, filepath.FromSlash(p))
+		if p == ".gitignore" {
+			if _, err := os.Stat(target); err == nil {
+				continue // keep an existing .gitignore
+			}
+		}
+		if err := os.MkdirAll(filepath.Dir(target), 0o755); err != nil {
+			fmt.Fprintln(stderr, "docpack init:", err)
+			return 2
+		}
+		if err := os.WriteFile(target, []byte(files[p]), 0o644); err != nil {
+			fmt.Fprintln(stderr, "docpack init:", err)
+			return 2
+		}
+	}
+	fmt.Fprintf(stdout, "created a docpack project in %s\nnext: replace every _fill: value in product.yaml and docs/index.md, then run docpack check\n", dir)
 	return 0
 }
 

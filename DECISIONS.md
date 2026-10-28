@@ -9,15 +9,15 @@ also banned from the repository. The banned-word rule is the stricter
 constraint, so the section is **Advisories** and the key is `advisories[]`
 (`{id, text}`). Same purpose: notices a reader must act on.
 
-## D2. Schema `$id`s
+## D2. Schema `$id`s and the versioned schema directory
 
-Every schema's `$id` starts
-`https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/`, where the
-trailing `1.0` is the package `schema_version`. The checker never fetches the
-schemas: they are embedded, and `schemas.BaseURL` is the one constant in code.
-The schema files themselves live directly in `schemas/`, so the `$id`s name the
-schemas but do not resolve to raw files at that path; consumers should load
-them from the repository or a release archive.
+The schemas live in `schemas/1.0/`, one directory per package `schema_version`.
+Every `$id` is the raw URL of its file on `main`, for example
+`https://raw.githubusercontent.com/42kohd/docpack/main/schemas/1.0/block.schema.json`,
+so a consumer can fetch them directly. The checker never fetches them: they
+are embedded, and `schemas.Version` and `schemas.BaseURL` are the only
+constants in code. A new schema version gets a new directory; published
+directories are not changed.
 
 ## D3. Go module path
 
@@ -114,3 +114,16 @@ CI uses GitHub-hosted runners (`ubuntu-latest`) and the official goreleaser
 action. `.goreleaser.yaml` builds linux, darwin and windows for amd64 and
 arm64; archives include the kit and schemas. `release.yml` publishes a draft
 release when a `v*` tag is pushed. No tag has been created.
+
+## D15. `docpack init` and `_fill:` outside documents
+
+`docpack init <short-name>` writes a complete project whose only problems are
+`_fill:` markers: in `product.yaml` (name, binary, version, support_email) and
+in `docs/index.md` (the landing skeleton, slug `index`, which the generated
+nav lists). The nav has two groups, "Get started" and a generated "Releases"
+group that stays empty until release documents exist. Data files start as
+empty lists. To make that hold, `fill-left` also scans `product.yaml` and
+`data/**/*.yaml` (comment lines excepted), schema checks skip values that
+still hold `_fill:`, and the literal-name checks wait until the name is real.
+`testdata/init/filled/` holds the filled-in files, and a test proves both
+states.

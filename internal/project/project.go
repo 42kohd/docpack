@@ -259,16 +259,47 @@ func (p *Project) validate(v *schema.Validator, rel, name string, node *yaml.Nod
 	if val == nil {
 		val = []any{}
 	}
-	problems := v.Validate(name, val)
+	var problems []schema.Problem
+	for _, pr := range v.Validate(name, val) {
+		// A value still holding a _fill: marker is reported once, as
+		// fill-left, instead of also failing its pattern.
+		if s, ok := valueAt(val, pr.Pointer).(string); ok && strings.Contains(s, "_fill:") {
+			continue
+		}
+		problems = append(problems, pr)
+	}
 	if len(problems) > 0 {
 		p.Broken[rel] = true
 	}
 	for _, pr := range problems {
 		p.Diags.Add("data-schema", rel, p.Line(rel, pr.Pointer), describe(pr),
-			fmt.Sprintf("Correct the value to match schemas/%s.schema.json", name))
+			fmt.Sprintf("Correct the value to match schemas/%s%s.schema.json", schema.Dir, name))
 	}
 	inst, _ := schema.Instance(val)
 	return inst, len(problems) == 0
+}
+
+// valueAt follows a JSON pointer into a decoded YAML value.
+func valueAt(v any, pointer string) any {
+	for _, tok := range strings.Split(strings.TrimPrefix(pointer, "/"), "/") {
+		if tok == "" {
+			continue
+		}
+		tok = strings.ReplaceAll(strings.ReplaceAll(tok, "~1", "/"), "~0", "~")
+		switch x := v.(type) {
+		case map[string]any:
+			v = x[tok]
+		case []any:
+			i, err := strconv.Atoi(tok)
+			if err != nil || i >= len(x) {
+				return nil
+			}
+			v = x[i]
+		default:
+			return nil
+		}
+	}
+	return v
 }
 
 func describe(pr schema.Problem) string {

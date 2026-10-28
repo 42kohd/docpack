@@ -1,35 +1,39 @@
-# Writing documentation with docpack
+# docpack: write your product docs
 
-You write each page as a Markdown file in `docs/`. `docpack check` tells you
-exactly what to fix, and when the check passes it builds the zip you send.
+You write each page as a Markdown file, `docpack check` tells you exactly what
+to fix, and you send one zip. The full dialect is in [SPEC.md](../SPEC.md).
 
-## The loop
+**1. Install.** Download the archive for your OS from
+<https://github.com/42kohd/docpack/releases> (`arm64` for Apple silicon and
+ARM machines, `amd64` otherwise), then put it on your PATH:
 
-1. **Start a page.** `docpack new howto rotate-output` writes
-   `docs/rotate-output.md` with every section the page needs and a `_fill:`
-   line in each. Types: `landing`, `concept`, `howto`, `integration`,
-   `format`, `reference`, `dashboard`, `release`.
-2. **Write it with your model.** Give your assistant `prompts/SYSTEM.md` as
-   its instructions and `prompts/new-document.md` as the task, with the
-   skeleton and your notes. To move an existing page across, use
-   `prompts/convert-existing.md`. If you use Claude Code or Cursor, the
-   `CLAUDE.md` here carries the same rules.
-3. **Check.** Run `docpack check`. Every problem is one line:
-   `docs/rotate-output.md:14  cmd-missing-variant  Command "Restart" has no macos: line. Add macos: <command>, or macos: none: <reason> if the command does not apply there`
-4. **Fix.** Apply the fix at the end of each line yourself, or paste the
-   output and the page into `prompts/fix-errors.md`. Run the check again until
-   it prints `ok`.
-5. **Look, then send.** `docpack serve` shows the site at
-   http://127.0.0.1:8080. When it looks right, send the zip that `check`
-   wrote to `dist/`.
+- Windows (PowerShell): `Expand-Archive docpack_*_windows_amd64.zip $HOME\docpack; [Environment]::SetEnvironmentVariable("Path", "$env:Path;$HOME\docpack", "User")`
+- macOS: `mkdir -p ~/docpack && tar -xzf docpack_*_darwin_arm64.tar.gz -C ~/docpack && xattr -cr ~/docpack && echo 'export PATH="$HOME/docpack:$PATH"' >> ~/.zshrc`
+- Linux: `mkdir -p ~/docpack && tar -xzf docpack_*_linux_amd64.tar.gz -C ~/docpack && echo 'export PATH="$HOME/docpack:$PATH"' >> ~/.bashrc`
 
-## What is where
+Open a new terminal and run `docpack version`. This kit is the `kit/` folder
+next to the binary.
 
-- `skeletons/`: one starting page per type (what `docpack new` writes).
-- `examples/`: three finished pages, one integration, one howto and one
-  format, that pass the check.
-- `prompts/`: instructions for a language model.
-- `CLAUDE.md`: the same rules for coding assistants.
+**2. Start a project.** In an empty folder run `docpack init <short-name>`
+(for example `docpack init acme`), then replace every `_fill:` value in
+`product.yaml`.
 
-Add a new page to `nav` in `product.yaml`, or to the `related` list of a page
-that is already there. A page nobody can reach is an error.
+**3. Add a page.** `docpack new <type> <slug>`, for example
+`docpack new howto install-agent`. Types: `landing`, `concept`, `howto`,
+`integration`, `format`, `reference`, `dashboard`, `release`. Add the slug to
+`nav` in `product.yaml`.
+
+**4. Write it.** Replace every `_fill:` line yourself, or use a model: give it
+`prompts/SYSTEM.md` as its instructions, then paste `prompts/new-document.md`,
+the skeleton and your notes. In Claude Code or Cursor, copy `CLAUDE.md` into
+your project. `examples/` has three finished pages.
+
+**5. Check, fix, repeat.** Run `docpack check`. Each problem is one line that
+ends with the fix, for example
+`docs/install-agent.md:14  cmd-missing-variant  Command "Start" has no macos: line. Add macos: <command>, or macos: none: <reason> if the command does not apply there`.
+Fix it, or paste the output and the page into `prompts/fix-errors.md`. Repeat
+until it prints `ok`.
+
+**6. Preview.** `docpack serve`, then open <http://127.0.0.1:8080>.
+
+**7. Send.** Send `dist/<short>-<version>.zip` to your docs maintainer.

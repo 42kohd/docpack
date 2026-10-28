@@ -2,6 +2,9 @@ package rules
 
 import (
 	"fmt"
+	"io/fs"
+	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -142,10 +145,10 @@ func (c *checker) text(d *dialect.Document) {
 	}
 	pr := c.p.Product
 	var nameRe, binRe *regexp.Regexp
-	if pr.Name != "" {
+	if pr.Name != "" && !strings.Contains(pr.Name, "_fill:") {
 		nameRe = regexp.MustCompile(`(^|[^A-Za-z0-9_])` + regexp.QuoteMeta(pr.Name) + `($|[^A-Za-z0-9_])`)
 	}
-	if pr.Binary != "" && pr.Binary != pr.Name {
+	if pr.Binary != "" && pr.Binary != pr.Name && !strings.Contains(pr.Binary, "_fill:") {
 		binRe = regexp.MustCompile(`(^|[^A-Za-z0-9_])` + regexp.QuoteMeta(pr.Binary) + `($|[^A-Za-z0-9_])`)
 	}
 	for i := d.BodyLine - 1; i < len(lines); i++ {
@@ -161,6 +164,31 @@ func (c *checker) text(d *dialect.Document) {
 		if versionRe.MatchString(l) {
 			c.docAdd(d, "literal-version", i+1, "A version number is written out",
 				"Write {version} for the current version; describe older behavior in a release document")
+		}
+	}
+}
+
+// fillData reports _fill: markers left in product.yaml and the data files,
+// which docpack init writes.
+func (c *checker) fillData() {
+	files := []string{"product.yaml"}
+	_ = filepath.WalkDir(filepath.Join(c.p.Dir, "data"), func(fp string, d fs.DirEntry, err error) error {
+		if err == nil && !d.IsDir() && strings.HasSuffix(d.Name(), ".yaml") {
+			rel, _ := filepath.Rel(c.p.Dir, fp)
+			files = append(files, filepath.ToSlash(rel))
+		}
+		return nil
+	})
+	for _, rel := range files {
+		raw, err := os.ReadFile(filepath.Join(c.p.Dir, filepath.FromSlash(rel)))
+		if err != nil {
+			continue
+		}
+		for i, l := range strings.Split(string(raw), "\n") {
+			if strings.Contains(l, "_fill:") && !strings.HasPrefix(strings.TrimSpace(l), "#") {
+				c.p.Diags.Add("fill-left", rel, i+1, "A _fill: marker is still in the file",
+					"Replace the _fill: value with the real one")
+			}
 		}
 	}
 }

@@ -25,17 +25,14 @@ archives:
       - LICENSE
       - README.md
       - SPEC.md
-      - src: kit/README.md
-        dst: kit
-        strip_parent: true
-      - src: kit/CLAUDE.md
-        dst: kit
-        strip_parent: true
-      - kit/skeletons/*
-      - kit/examples/*
-      - kit/prompts/*
-      - schemas/*.json
-      - schemas/data/*.json
+      - CHANGELOG.md
+      - kit/README.md
+      - kit/CLAUDE.md
+      - kit/skeletons/*.md
+      - kit/examples/*.md
+      - kit/prompts/*.md
+      - schemas/1.0/*.json
+      - schemas/1.0/data/*.json
 
 checksum:
   name_template: checksums.txt

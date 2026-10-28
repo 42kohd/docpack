@@ -30,6 +30,7 @@ func Check(p *project.Project) {
 		c.images(d)
 		c.text(d)
 	}
+	c.fillData()
 	c.assets()
 	c.nav()
 }
